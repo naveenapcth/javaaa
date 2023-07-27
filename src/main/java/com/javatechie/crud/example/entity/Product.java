@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -60,6 +62,22 @@ public class Product {
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name, price, quantity);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		return id == other.id && Objects.equals(name, other.name)
+				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price) && quantity == other.quantity;
 	}
     
     
